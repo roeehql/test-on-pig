@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/pig-on-trip/static/css/main.e7e7c614.css",
+    "main.js": "/pig-on-trip/static/js/main.c31d0015.js",
+    "index.html": "/pig-on-trip/index.html",
+    "main.e7e7c614.css.map": "/pig-on-trip/static/css/main.e7e7c614.css.map",
+    "main.c31d0015.js.map": "/pig-on-trip/static/js/main.c31d0015.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e7e7c614.css",
+    "static/js/main.c31d0015.js"
+  ]
+}
