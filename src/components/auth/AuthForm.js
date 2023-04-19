@@ -3,14 +3,17 @@ import Input from "../atomic/Input";
 import Button from "../atomic/Button";
 import Toast from "../atomic/Toast";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { saveUser, signUpUser } from "../../data/store/profileListSlice";
 
 const AuthForm = () => {
   const [userName, setUserName] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleLoginClick = () => {
     if (validateUserName()) {
-      return handleLogin() ? true : false;
+      return handleLogin() ? navigate("/home") : false;
     } else return false;
   };
 
@@ -19,9 +22,9 @@ const AuthForm = () => {
   };
 
   const handleLogin = () => {
-    localStorage.setItem("userName", userName);
-    navigate("/home");
-    return true;
+    dispatch(signUpUser({ name: userName, isLoggedIn: true }));
+    dispatch(saveUser());
+    return <Toast title="실패" message="로그인을 다시 시도해주세요." />;
   };
 
   return (
@@ -58,9 +61,6 @@ const AuthForm = () => {
           />
         )}
       </div>
-      {!handleLoginClick() && (
-        <Toast title="실패" message="로그인을 다시 시도해주세요." />
-      )}
     </div>
   );
 };
