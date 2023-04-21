@@ -12,7 +12,7 @@ const ProfileList = () => {
 
   useEffect(() => {
     dispatch(getUserList(USERNAME));
-  }, []);
+  }, [dispatch]);
 
   return (
     <ul className="flex flex-row justify-center items-center w-fit h-20 bg-black">
@@ -23,7 +23,7 @@ const ProfileList = () => {
         >
           {user.isLoggedIn ? (
             <span className="px-2 py-1 rounded-lg bg-stone tracking-tighter text-red">
-              {user.name}
+              ✅{user.name}
             </span>
           ) : (
             <span className="px-2 py-1 rounded-lg bg-stone tracking-tighter">
