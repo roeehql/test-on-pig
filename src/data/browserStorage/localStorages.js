@@ -5,10 +5,8 @@ export const setStorage = (key, value) => {
 
 export const getStorage = (key) => {
   const data =
-    localStorage.getItem(key) !== null
-      ? localStorage.getItem(key)
-      : '[{"name":"no-data","isLoggedIn":"false"}]';
-  return JSON.parse(data);
+    localStorage.getItem(key) !== null ? localStorage.getItem(key) : undefined;
+  return data;
 };
 
 export const removeStorage = (key) => {

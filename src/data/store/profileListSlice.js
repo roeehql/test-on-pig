@@ -11,10 +11,12 @@ const profileListSlice = createSlice({
     },
     getUserList: (state) => {
       state = [];
-      const parsedUserList = JSON.parse(getStorage(USERNAME));
-      parsedUserList.forEach((user) => {
-        state.push({ ...user });
-      });
+      if (getStorage(USERNAME) !== undefined) {
+        const parsedUserList = JSON.parse(getStorage(USERNAME));
+        JSON.parse(parsedUserList).forEach((user) => {
+          state.push({ ...user });
+        });
+      }
       return state;
     },
     saveUser: (state) => {
