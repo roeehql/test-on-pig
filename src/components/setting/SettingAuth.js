@@ -31,7 +31,7 @@ const AddProfile = () => {
   };
 
   const handleAddProfile = () => {
-    if (profileList.some((user) => user.name === userName)) {
+    if (!profileList.some((user) => user.name === userName)) {
       changeIsLoggedIn();
       dispatch(signUpUser({ name: userName, isLoggedIn: true }));
       dispatch(saveUser());

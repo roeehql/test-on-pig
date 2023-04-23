@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import AuthForm from "./AuthForm";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import Toast from "../atomic/Toast";
 import {
   editUser,
   getUserList,
@@ -14,21 +13,35 @@ import { USERNAME } from "../../data/browserStorage/keys.constant";
 
 const AuthUser = () => {
   const [userName, setUserName] = useState("");
+  const [message, setMessage] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const userList = useSelector(selectProfileList);
 
   const handleFormBtnClick = () => {
-    checkDuplication() ? handleLogin() : handleSignup();
-    userList.some((user) => user.isLoggedIn === true) ? (
-      navigate("/home")
-    ) : (
-      <Toast title="실패" message="로그인을 다시 시도해주세요." />
-    );
+    if (checkUsersLength()) {
+      checkDuplication() ? handleLogin() : handleSignup();
+      userList.some((user) => user.isLoggedIn === true)
+        ? navigate("/home")
+        : showMessage();
+    } else {
+      showMessage();
+    }
+  };
+
+  const showMessage = () => {
+    setMessage(true);
+    setTimeout(() => {
+      setMessage(false);
+    }, 3000);
+  };
+
+  const checkUsersLength = () => {
+    dispatch(getUserList(USERNAME));
+    return userList < 4 ? true : false;
   };
 
   const checkDuplication = () => {
-    dispatch(getUserList(USERNAME));
     return userList === []
       ? false
       : userList.some((user) => user.name === userName);
@@ -48,6 +61,7 @@ const AuthUser = () => {
 
   const signUpPropsData = {
     userName,
+    message,
     buttonText: "입장하기",
     title: "별명을 입력하고 입장하세요!",
     handleInputChange: (e) => setUserName(e.target.value),

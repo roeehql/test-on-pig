@@ -7,6 +7,7 @@ import Small from "../atomic/Small";
 
 const AuthForm = ({
   userName,
+  message,
   buttonText,
   title,
   handleInputChange,
@@ -15,6 +16,11 @@ const AuthForm = ({
   return (
     <div className="px-6 py-9 border-2 border-black bg-white shadow">
       <h1 className="mb-4 tracking-tighter">{title}</h1>
+      <div className="h-10">
+        {message && (
+          <Small message="로그인에 실패했습니다. 별명은 3개까지 만드실 수 있습니다." />
+        )}
+      </div>
       <Input
         type="text"
         name="username"
@@ -46,6 +52,7 @@ const AuthForm = ({
 
 AuthForm.propTypes = {
   userName: PropTypes.string,
+  message: PropTypes.bool,
   buttonText: PropTypes.string,
   title: PropTypes.string,
   handleInputChange: PropTypes.func,
