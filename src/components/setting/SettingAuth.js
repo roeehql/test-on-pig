@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../data/store/store";
 import {
   editUser,
   signUpUser,
@@ -13,8 +13,8 @@ import SettingListView from "./SettingListView";
 import Button from "../atomic/Button";
 
 const AddProfile = () => {
-  const dispatch = useDispatch();
-  const profileList = useSelector(selectProfileList);
+  const dispatch = useAppDispatch();
+  const profileList = useAppSelector(selectProfileList);
   const navigate = useNavigate();
   const [userName, setUserName] = useState("");
   const [openAddProfileForm, setOpenAddProfileForm] = useState(false);

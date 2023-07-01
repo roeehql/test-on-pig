@@ -18,17 +18,6 @@ const AuthUser = () => {
   const dispatch = useDispatch();
   const userList = useSelector(selectProfileList);
 
-  const handleFormBtnClick = () => {
-    if (checkUsersLength()) {
-      checkDuplication() ? handleLogin() : handleSignup();
-      userList.some((user) => user.isLoggedIn === true)
-        ? navigate("/home")
-        : showMessage();
-    } else {
-      showMessage();
-    }
-  };
-
   const showMessage = () => {
     setMessage(true);
     setTimeout(() => {
@@ -38,7 +27,7 @@ const AuthUser = () => {
 
   const checkUsersLength = () => {
     dispatch(getUserList(USERNAME));
-    return userList < 4 ? true : false;
+    return userList.length < 4 ? true : false;
   };
 
   const checkDuplication = () => {
@@ -59,6 +48,17 @@ const AuthUser = () => {
     dispatch(getUserList(USERNAME));
   };
 
+  const handleFormBtnClick = () => {
+    if (checkUsersLength()) {
+      checkDuplication() ? handleLogin() : handleSignup();
+      userList.some((user) => user.isLoggedIn === true)
+        ? navigate("/home")
+        : showMessage();
+    } else {
+      showMessage();
+    }
+  };
+
   const signUpPropsData = {
     userName,
     message,
@@ -67,6 +67,7 @@ const AuthUser = () => {
     handleInputChange: (e) => setUserName(e.target.value),
     handleFormBtnClick: () => handleFormBtnClick(),
   };
+
   return <AuthForm {...signUpPropsData} />;
 };
 

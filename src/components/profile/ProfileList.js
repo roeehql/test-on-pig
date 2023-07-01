@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../data/store/store";
 import {
   editUser,
   getUserList,
@@ -9,8 +9,8 @@ import {
 import { USERNAME } from "../../data/browserStorage/keys.constant";
 
 const ProfileList = () => {
-  const profileList = useSelector(selectProfileList);
-  const dispatch = useDispatch();
+  const profileList = useAppSelector(selectProfileList);
+  const dispatch = useAppDispatch();
 
   const handleProfileChange = (e) => {
     dispatch(editUser({ name: getCurrentUser(), isLoggedIn: false }));
